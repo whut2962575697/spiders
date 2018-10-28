@@ -1,0 +1,22 @@
+{
+"filters":[
+  {"type":0, "filter":"http://www.51ape.com/ape/\d+.html"},
+  {"type":2, "filter":"http://www.tianqihoubao.com/aqi/wuhan.html"},
+  {"type":2, "filter":"http://www.tianqihoubao.com/aqi/shiyan.html"},
+  {"type":2, "filter":"http://www.tianqihoubao.com/aqi/yichang.html"},
+  {"type":2, "filter":"http://www.tianqihoubao.com/aqi/ezhou.html"},
+  {"type":2, "filter":"http://www.tianqihoubao.com/aqi/jingmen.html"},
+  {"type":2, "filter":"http://www.tianqihoubao.com/aqi/xiaogan.html"},
+  {"type":2, "filter":"http://www.tianqihoubao.com/aqi/huanggang.html"},
+  {"type":2, "filter":"http://www.tianqihoubao.com/aqi/xianning.html"},
+  {"type":2, "filter":"http://www.tianqihoubao.com/aqi/huangshi.html"},
+  {"type":2, "filter":"http://www.tianqihoubao.com/aqi/enshi.html"},
+  {"type":2, "filter":"http://www.tianqihoubao.com/aqi/xiangyang.html"},
+  {"type":2, "filter":"http://www.tianqihoubao.com/aqi/suizhou.html"},
+  {"type":2, "filter":"http://www.tianqihoubao.com/aqi/jingzhou.html"},
+  {"type":3, "filter":"http://www.51ape.com/\w+/index_\d.html"},
+  {"type":3, "filter":"http://www.51ape.com/skin/ape/php/qx_2.php?qx=[^=]+"}
+],
+  "url":{"urlmd5":"278caa6494cf393b5653d5240c6624c1", "url":"http://www.51ape.com/", "type":1, "status":0}
+}
+    

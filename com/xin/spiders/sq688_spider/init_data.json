@@ -1,0 +1,9 @@
+{
+"filters":[
+  {"type":0, "filter":"https://www.sq688.com/download/\\d+.html"},
+  {"type":2, "filter":"https://www.sq688.com/singer/\\d+.html"},
+  {"type":3, "filter":"https://www.sq688.com/singer/\\d+/\\d+.html"},
+  {"type":4, "filter":"https://www.sq688.com/detail/\\d+.html"}
+],
+  "url":{"urlmd5":"278caa6494cf393b5653d5240c6624c1", "url":"https://www.sq688.com/", "type":1, "status":0}
+}

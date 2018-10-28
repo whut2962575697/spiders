@@ -1,0 +1,9 @@
+{
+"filters":[
+  {"type":0, "filter":"http://www.51ape.com/ape/\\d+.html"},
+  {"type":2, "filter":"http://www.51ape.com/\\w+/"},
+  {"type":3, "filter":"http://www.51ape.com/\\w+/index_\\d.html"},
+  {"type":3, "filter":"http://www.51ape.com/skin/ape/php/qx_2.php?qx=[^=]+"}
+],
+  "url":{"urlmd5":"278caa6494cf393b5653d5240c6624c1", "url":"http://www.51ape.com/", "type":1, "status":0}
+}

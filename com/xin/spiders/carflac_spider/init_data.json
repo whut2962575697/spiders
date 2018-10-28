@@ -1,0 +1,30 @@
+{
+"filters":[
+  {"type":0, "filter":"http://www.carflac.com/ape/\\d+.html"},
+  {"type":0,"filter":"http://www.carflac.com/wav/\\d+.html"},
+  {"type":0, "filter":"http://www.carflac.com/xiyou/\\d+.html"},
+  {"type":0, "filter":"http://www.carflac.com/dst/\\d+.html"},
+  {"type":0,"filter":"http://www.carflac.com/dsd/\\d+.html"},
+  {"type":0,"filter":"http://www.carflac.com/huayu/\\d+.html"},
+  {"type":0,"filter":"http://www.carflac.com/oumei/\\d+.html"},
+  {"type":0,"filter":"http://www.carflac.com/rihan/\\d+.html"},
+  {"type":0,"filter":"http://www.carflac.com/wuqu/\\d+.html"},
+  {"type":0,"filter":"http://www.carflac.com/chunyinyue/\\d+.html"},
+  {"type":0,"filter":"http://www.carflac.com/zhuanji/\\d+.html"},
+  {"type":2, "filter":"http://www.carflac.com/ape/"},
+  {"type":2,"filter":"http://www.carflac.com/wav/"},
+  {"type":2, "filter":"http://www.carflac.com/xiyou/"},
+  {"type":2, "filter":"http://www.carflac.com/dst/"},
+  {"type":2,"filter":"http://www.carflac.com/dsd/"},
+  {"type":2,"filter":"http://www.carflac.com/huayu/"},
+  {"type":2,"filter":"http://www.carflac.com/oumei/"},
+  {"type":2,"filter":"http://www.carflac.com/rihan/"},
+  {"type":2,"filter":"http://www.carflac.com/wuqu/"},
+  {"type":2,"filter":"http://www.carflac.com/chunyinyue/"},
+  {"type":2,"filter":"http://www.carflac.com/zhuanji/"},
+  {"type":3, "filter":"http://www.carflac.com/e/tags/\\?tagid=\\d+"}
+
+],
+  "url":{"urlmd5":"278caa6494cf393b5653d5240c6624c1", "url":"http://www.carflac.com", "type":1, "status":0}
+}
+    

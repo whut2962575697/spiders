@@ -1,0 +1,30 @@
+{
+  "url_table":{
+    "fields":
+    [
+      {"field_name":"urlmd5", "field_type":"varchar2", "field_length":50},
+      {"field_name":"url", "field_type":"varchar2", "field_length":800},
+      {"field_name":"type", "field_type":"number"},
+      {"field_name":"status", "field_type":"number"},
+      {"field_name":"datetime", "field_type":"datetime"}
+    ],
+    "primary_key":["urlmd5"]
+  },
+  "filter_table":{
+    "fields":
+    [
+      {"field_name":"type", "field_type":"number"},
+      {"field_name":"filter", "field_type":"varchar2", "field_length":100}
+    ]
+  },
+     "page_table":{
+       "fields":
+       [
+         {"field_name":"urlmd5", "field_type":"varchar2", "field_length":50},
+         {"field_name":"url", "field_type":"varchar2", "field_length":800},
+         {"field_name":"page", "field_type":"blob"}
+       ],
+        "primary_key":["urlmd5"]
+     }
+
+}

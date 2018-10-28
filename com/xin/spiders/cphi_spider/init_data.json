@@ -1,0 +1,36 @@
+{
+"filters":[
+  {"type":0, "filter":"http://www.cphi.cn/s-[^/]+/$"},
+  {"type":2, "filter":"http://www.cphi.cn/Products/list-htm-catid-4.html"},
+  {"type":2, "filter":"http://www.cphi.cn/Products/list-htm-catid-25.html"},
+  {"type":2, "filter":"http://www.cphi.cn/Products/list-htm-catid-29.html"},
+  {"type":2, "filter":"http://www.cphi.cn/Products/list-htm-catid-75.html"},
+  {"type":2, "filter":"http://www.cphi.cn/Products/list-htm-catid-78.html"},
+  {"type":2, "filter":"http://www.cphi.cn/Products/list-htm-catid-104.html"},
+  {"type":2, "filter":"http://www.cphi.cn/Products/list-htm-catid-128.html"},
+  {"type":2, "filter":"http://www.cphi.cn/Products/list-htm-catid-162.html"},
+  {"type":2, "filter":"http://www.cphi.cn/Products/list-htm-catid-178.html"},
+  {"type":2, "filter":"http://www.cphi.cn/Products/list-htm-catid-212.html"},
+  {"type":2, "filter":"http://www.cphi.cn/Products/list-htm-catid-230.html"},
+  {"type":2, "filter":"http://www.cphi.cn/Products/list-htm-catid-243.html"},
+ {"type":2, "filter":"http://www.cphi.cn/Products/list-htm-catid-248.html"},
+{"type":2, "filter":"http://www.cphi.cn/Products/list-htm-catid-262.html"},
+{"type":2, "filter":"http://www.cphi.cn/Products/list-htm-catid-269.html"},
+  {"type":2, "filter":"http://www.cphi.cn/Products/list-htm-catid-282.html"},
+{"type":2, "filter":"http://www.cphi.cn/Products/list-htm-catid-291.html"},
+{"type":2, "filter":"http://www.cphi.cn/Products/list-htm-catid-333.html"},
+{"type":2, "filter":"http://www.cphi.cn/Products/list-htm-catid-355.html"},
+{"type":2, "filter":"http://www.cphi.cn/Products/list-htm-catid-476.html"},
+  {"type":2, "filter":"http://www.cphi.cn/Products/list-htm-catid-630.html"},
+{"type":2, "filter":"http://www.cphi.cn/Products/list-htm-catid-677.html"},
+  {"type":2, "filter":"http://www.cphi.cn/Products/list-htm-catid-678.html"},
+  {"type":3, "filter":"http://www.cphi.cn/Products/list-htm-page-\\d+-catid-\\d+-perpage-\\d+.html"}
+
+
+
+
+
+],
+  "url":{"urlmd5":"278caa6494cf393b5653d5240c6624c1", "url":"http://www.cphi.cn/Products/", "type":1, "status":0}
+}
+    

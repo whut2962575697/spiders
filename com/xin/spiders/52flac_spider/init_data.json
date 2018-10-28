@@ -1,0 +1,14 @@
+{
+"filters":[
+  {"type":0, "filter":"http://www.52flac.com/download/\\d+.html"},
+  {"type":2, "filter":"http://www.52flac.com/neidi/\\d+/"},
+  {"type":2, "filter":"http://www.52flac.com/gangtai/\\d+/"},
+  {"type":2, "filter":"http://www.52flac.com/rihan/\\d+/"},
+  {"type":2, "filter":"http://www.52flac.com/omei/\\d+/"},
+  {"type":3, "filter":"http://www.52flac.com/neidi/\\d+.html"},
+  {"type":3, "filter":"http://www.52flac.com/gangtai/\\d+.html"},
+  {"type":3, "filter":"http://www.52flac.com/rihan/\\d+.html"},
+  {"type":3, "filter":"http://www.52flac.com/omei/\\d+.html"}
+],
+  "url":{"urlmd5":"278caa6494cf393b5653d5240c6624c1", "url":"http://www.52flac.com/", "type":1, "status":0}
+}
