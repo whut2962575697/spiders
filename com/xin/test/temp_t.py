@@ -107,37 +107,5 @@ if __name__ == "__main__":
         else:
             sheet.write(x,0,"test")
     work.save("yy.xls")
-    # generate_sample("tt.xls")
-    # x = 9.800543790665742216e-01
-    #
-    # print x
-    #extract_data(r"C:\Users\29625\Desktop\zxx\2016Precipitation",r"C:\Users\29625\Desktop\zxx\results\2016Precipitation")
-    # work_book = xlrd.open_workbook(r"C:\Users\29625\Desktop\FCN.xlsx")
-    # save_book = xlwt.Workbook()
-    # work_book1 = xlrd.open_workbook(r"C:\Users\29625\Desktop\result.xls")
-    # sheet2 = work_book1.sheet_by_index(0)
-    # sheet1 = save_book.add_sheet("sheet1")
-    # sheet = work_book.sheet_by_index(0)
-    # row_num = sheet2.nrows
-    # x = 0
-    #
-    # for i in range(row_num):
-    #     res_caption = sheet2.cell(i,1).value
-    #     file_name = sheet2.cell(i,2).value.strip("]").split("/")[-1]
-    #     for x in range(3):
-    #         caption = sheet.cell(3*i+x,0).value
-    #         file = sheet.cell(3*i+x,1).value
-    #         sheet1.write(3*i+x,0,caption)
-    #         sheet1.write(3 * i + x, 1, file)
-    #         if x==0:
-    #             sheet1.write(3 * i + x, 2, res_caption)
-    #             sheet1.write(3 * i + x, 3, file_name)
-    #     # if sheet.cell(i,7).value == "val":
-    #     #     caption = sheet.cell(i,1).value
-    #     #     file_name = sheet.cell(i,4).value
-    #     #     sheet1.write(x,0,caption)
-    #     #     print file_name
-    #     #     sheet1.write(x,1,file_name)
-    #     #     x = x+1
-    # save_book.save(r"C:\Users\29625\Desktop\FCN_RES.xlsx")
+
 
