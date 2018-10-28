@@ -84,9 +84,6 @@ def transform_coord(in_xy,out_xy):
 
 
 
-# move_data(src_path=r"C:\Users\29625\Desktop\image_part_gt\image_part_gt",
-#           des1=r"C:\Users\29625\Desktop\image_part_gt\mainroad",
-#           des2=r"C:\Users\29625\Desktop\image_part_gt\not",excel_path=r"C:\Users\29625\Desktop\gt_eachpart0.5.xls")pa
 
 
 if __name__ == "__main__":
