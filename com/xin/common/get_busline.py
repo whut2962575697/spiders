@@ -10,8 +10,6 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 
-
-
 def get_lines(url, type):
     downloader = PageDownload()
     page = downloader.simple_download(url)
@@ -68,12 +66,12 @@ def download_page():
 
 
 if __name__=="__main__":
-    # base_url = "http://wuhan.8684.cn/line"
-    # for x in range(16):
-    #     url = base_url+str(x+1)
-    #     lines = get_lines(url=url, type=x+1)
-    #     for line in lines:
-    #         get_page_url(line[0], line[1])
+    base_url = "http://shanghai.8684.cn/line"
+    for x in range(16):
+        url = base_url+str(x+1)
+        lines = get_lines(url=url, type=x+1)
+        for line in lines:
+            get_page_url(line[0], line[1])
 
     download_page()
 
