@@ -21,7 +21,7 @@ def get_lines(url, type):
     return lines
 
 
-def get_page_url(line_name, line_type):
+def get_page_url(line_name, line_type, city_code):
     base_url = 'http://map.baidu.com/?newmap=1&reqflag=pcmap&biz=1&from=webmap&da_par=direct&pcevaname=pc4.1&qt=bl&da_src=searchBox.button&wd='+line_name+'&c=218&l=13&b=(12658020.44,3478524.27;12811429.27,3658064.64)&from=webmap&sug_forward=&tn=B_NORMAL_MAP&nn=0'
     downloader = PageDownload()
     page = downloader.simple_download(base_url)
@@ -65,7 +65,7 @@ def download_page():
         db.close()
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     base_url = "http://shanghai.8684.cn/line"
     for x in range(16):
         url = base_url+str(x+1)

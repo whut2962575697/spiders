@@ -1,5 +1,4 @@
-
-    # -*- encoding=utf-8 -*-
+# -*- encoding=utf-8 -*-
 
 from com.xin.common.MysqlManage import MysqlHandle
 from com.xin.common.RequestManage import PageDownload
@@ -164,5 +163,3 @@ class DownloadTool(object):
             return False
 
 
-
-    

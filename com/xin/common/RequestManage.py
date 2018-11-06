@@ -33,7 +33,7 @@ class PageDownload(object):
             if respond.status_code == 200:
                 content = respond.content
 
-                coding = re.findall(r'charset="?([^<]+)"', content)
+                coding = re.findall(r'charset="?([^<^"]+)"', content)
                 if not coding:
                     coding = respond.encoding
                 else:
@@ -164,10 +164,13 @@ class WebSelenium(object):
 
         elif browser == 'chrome':  # 选择谷歌浏览器
             options = webdriver.ChromeOptions()  # 谷歌浏览器的配置选项类
+            options.add_argument('--headless')
+            options.add_argument('--disable-gpu')
+            # options.add_argument('--no-sandbox')
             if self.proxy is not None:  # 判断是否使用代理
                 options.add_argument('--proxy-server=http://' + self.proxy)
-            options.add_argument(
-                    r'--user-data-dir=C:\Users\29625\AppData\Local\Google\Chrome\User Data')  # 设置成用户自己的数据目录
+            # options.add_argument(
+            #         r'--user-data-dir=C:\Users\29625\AppData\Local\Google\Chrome\User Data')  # 设置成用户自己的数据目录
 
             driver = webdriver.Chrome(executable_path=self.chrome_path, chrome_options=options)
 
@@ -199,13 +202,7 @@ if __name__ == "__main__":
 
 
 
-    dic_data = {
-        "page_id": "0",
-        "timestamp": "0"
-    }
-    downloader = PageDownload(hd=test_headers)
-    page = downloader.download_with_post("http://www.indata3.com/mice-api/company/search/list",dic_data)
-    json_page = json.loads(page)
+
 
     # cookies = {
     #    "BAIDUID": "B96C3563BF2F637009C796EFF6D94005:FG=1",
@@ -231,9 +228,19 @@ if __name__ == "__main__":
     # page = downloader.simple_download(url="http://www.52flac.com/download/9108.html")
     # #page = downloader.download_with_cookies(login_url="http://www.52flac.com/download/9222.html", cookies=cookies)
     # print page
-    #webSelenium = WebSelenium()
+    webSelenium = WebSelenium()
+    webdriver = webSelenium.simple_download("http://127.0.0.1/common/get_bmap_boundary?city=黄梅县", "chrome")
+
     # webdriver = webSelenium.login_with_cookies(login_url="http://pan.baidu.com/s/1c03zJGW", cookies_data=cookies, domain="pan.baidu.com")
-    # textbox = webdriver.find_elements_by_xpath("//input[@id='fmdJvd']")[0]
+    button_path = webdriver.find_elements_by_xpath("/html/body/input[2]")[0]
+    button_path.click()
+    time.sleep(5)
+    button_path.click()
+    button_download = webdriver.find_element_by_xpath("/html/body/input[3]")
+    time.sleep(5)
+    button_download.click()
+
+
     # textbox.send_keys("m43t")
     # button = webdriver.find_elements_by_xpath("//a[@class='g-button g-button-blue-large']")[0]
     # button.click()
