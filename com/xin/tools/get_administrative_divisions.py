@@ -22,8 +22,13 @@ def download(division, d_type, abb_name=None):
             zip_code = row.find_element_by_xpath("td[7]").text
             print (c_division, population, area, code, zone, zip_code)
             db = MysqlHandle()
-            sql = "insert into divisions values(%s,%s,NULL ,%s,%s,%s,%s,%s,%s)"
-            db.insert(sql, [(c_division, code, 2, population, area, zone, zip_code, division)])
+            sql = "insert into divisions values(%s,%s,NULL ,%s,%s,%s,%s,%s,%s,0)"
+            is_ok = db.insert(sql, [(c_division, code, 2, population, area, zone, zip_code, division)])
+            db.close()
+            if is_ok:
+                db = MysqlHandle()
+                sql = 'update divisions set status=200 where division="'+division+'" and type='+str(d_type)
+                db.update(sql)
 
     elif d_type == 2:
         db = MysqlHandle()
@@ -54,8 +59,12 @@ def download(division, d_type, abb_name=None):
                 zip_code = None
             print (c_division, population, area, code, zone, zip_code)
             db = MysqlHandle()
-            sql = "insert into divisions values(%s,%s,NULL ,%s,%s,%s,%s,%s,%s)"
-            db.insert(sql, [(c_division, code, 3, population, area, zone, zip_code, division)])
+            sql = "insert into divisions values(%s,%s,NULL ,%s,%s,%s,%s,%s,%s,0)"
+            is_ok = db.insert(sql, [(c_division, code, 3, population, area, zone, zip_code, division)])
+            if is_ok:
+                db = MysqlHandle()
+                sql = 'update divisions set status=200 where division="' + division + '" and type=' + str(d_type)
+                db.update(sql)
 
     else:
         pass
@@ -63,11 +72,14 @@ def download(division, d_type, abb_name=None):
 
 def spider(d_type):
     db = MysqlHandle()
-    sql = "select division, abb_name from divisions where type ="+str(d_type)
+    sql = "select division, abb_name from divisions where status=0 and type ="+str(d_type)
     query_res = db.query(sql)
     for (division, abb_name) in query_res:
         print division
-        download(division, d_type, abb_name)
+        try:
+            download(division, d_type, abb_name)
+        except Exception, e:
+            print (e.message)
 
 
 if __name__ == "__main__":
