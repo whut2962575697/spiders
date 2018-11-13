@@ -16,7 +16,8 @@ def merge(shp_path):
     for shp_file in shp_files:
         shp_name = shp_file[shp_file.rindex("\\")+1:]
         shp_name = shp_name.decode("gbk").encode("utf-8")
-        if shp_name.endswith("区.shp") or shp_name.endswith("县.shp"):
+        if shp_name.endswith("区.shp") or shp_name.endswith("县.shp")  or shp_name.endswith("市.shp"):
+
             cursor = arcpy.da.SearchCursor(shp_name, fields)
             values = []
 
@@ -35,5 +36,5 @@ def merge(shp_path):
             del cursor
 
 
-if __name__ =="__main__":
-    merge(r"G:\xin.src\c#\TrastationSystem\TrastationSystem\TrastationSystem\bin\divisions")
+if __name__ == "__main__":
+    merge(r"G:\xin.data\spiders_data\hbs")

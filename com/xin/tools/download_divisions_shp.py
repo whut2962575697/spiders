@@ -9,18 +9,18 @@ import arcpy
 
 def download():
     db = MysqlHandle()
-    sql = "select division, parent from divisions where parent='武汉市'"
+    sql = "select s.division, s.parent from divisions t,divisions s where t.division=s.parent and t.parent='湖北省' "
     query_res = db.query(sql)
     webSelenium = WebSelenium()
     for (division, parent) in query_res:
         division = division.replace("+", "")
         division = division.replace("☆", "")
         search_word = parent+division
-        if arcpy.Exists(r'G:\xin.src\c#\TrastationSystem\TrastationSystem\TrastationSystem\bin\divisions' + "\\" + search_word + ".shp"):
+        if arcpy.Exists(r'G:\xin.data\spiders_data\hbs' + "\\" + search_word + ".shp"):
             continue
         print (division)
         try:
-            webdriver = webSelenium.simple_download("http://127.0.0.1/common/get_bmap_boundary?city=" + search_word,
+            webdriver = webSelenium.simple_download("http://127.0.0.1/common/get_bmap_boundary?city=" + division,
                                                     "chrome")
 
             # webdriver = webSelenium.login_with_cookies(login_url="http://pan.baidu.com/s/1c03zJGW", cookies_data=cookies, domain="pan.baidu.com")

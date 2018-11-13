@@ -1,15 +1,19 @@
 {
-  "url_table":{
+  "boundary_table":{
     "fields":
     [
-      {"field_name":"urlmd5", "field_type":"varchar2", "field_length":50},
-      {"field_name":"url", "field_type":"varchar2", "field_length":800},
-      {"field_name":"type", "field_type":"number"},
+      {"field_name":"md5", "field_type":"varchar2", "field_length":50},
       {"field_name":"boundary", "field_type":"varchar2", "field_length":100},
+      {"field_name":"type", "field_type":"number"},
+      {"field_name":"lng_min", "field_type":"number", "field_length":20, "field_precision":10},
+      {"field_name":"lat_min", "field_type":"number", "field_length":20, "field_precision":10},
+      {"field_name":"lng_max", "field_type":"number", "field_length":20, "field_precision":10},
+      {"field_name":"lat_max", "field_type":"number", "field_length":20, "field_precision":10},
+      {"field_name":"total_count", "field_type":"number", "field_length":6},
       {"field_name":"status", "field_type":"number"},
       {"field_name":"datetime", "field_type":"datetime"}
     ],
-    "primary_key":["urlmd5"]
+    "primary_key":["md5"]
   },
   "filter_table":{
     "fields":
@@ -21,21 +25,24 @@
      "page_table":{
        "fields":
        [
-         {"field_name":"urlmd5", "field_type":"varchar2", "field_length":50},
-         {"field_name":"url", "field_type":"varchar2", "field_length":800},
+         {"field_name":"md5", "field_type":"varchar2", "field_length":50},
          {"field_name":"uid", "field_type":"varchar2", "field_length":50},
          {"field_name":"name", "field_type":"varchar2", "field_length":300},
          {"field_name":"address", "field_type":"varchar2", "field_length":100},
          {"field_name":"phone", "field_type":"varchar2", "field_length":20},
+         {"field_name":"province", "field_type":"varchar2", "field_length":100},
+         {"field_name":"city", "field_type":"varchar2", "field_length":100},
+         {"field_name":"area", "field_type":"varchar2", "field_length":100},
          {"field_name":"x", "field_type":"varchar2", "field_length":200},
          {"field_name":"y", "field_type":"varchar2", "field_length":200},
          {"field_name":"geo", "field_type":"varchar2", "field_length":800},
          {"field_name":"image", "field_type":"varchar2", "field_length":200},
          {"field_name":"tag", "field_type":"varchar2", "field_length":50},
          {"field_name":"price", "field_type":"varchar2", "field_length":10},
-         {"field_name":"datetime", "field_type":"datetime"}
+         {"field_name":"datetime", "field_type":"datetime"},
+         {"field_name":"status", "field_type":"number"}
        ],
-        "primary_key":["urlmd5"]
+        "primary_key":["md5"]
      }
 
 }

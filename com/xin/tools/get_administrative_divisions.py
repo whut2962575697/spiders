@@ -20,6 +20,16 @@ def download(division, d_type, abb_name=None):
             code = row.find_element_by_xpath("td[5]").text
             zone = row.find_element_by_xpath("td[6]").text
             zip_code = row.find_element_by_xpath("td[7]").text
+            if population == u'':
+                population = None
+            if area == u'':
+                area = None
+            if code == u'':
+                code = None
+            if zone == u'':
+                zone = None
+            if zip_code == u'':
+                zip_code = None
             print (c_division, population, area, code, zone, zip_code)
             db = MysqlHandle()
             sql = "insert into divisions values(%s,%s,NULL ,%s,%s,%s,%s,%s,%s,0)"

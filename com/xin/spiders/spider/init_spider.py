@@ -11,26 +11,33 @@ sys.setdefaultencoding("utf-8")
 
 
 class Initializer(object):
-    def __init__(self, source, table_config, filter_config, test_url="http://www.baidu.com"):
+    def __init__(self, source, table_config, filter_config, test_url="http://www.baidu.com", need_proxy=True):
 
         self.url_table = source+"_url_table"
         self.filter_table = source + "_filter_table"
         self.page_table = source+"_page_table"
+        self.boundary_table = source+"_boundary_table"
         self.table_config = table_config
         self.filter_config = filter_config
         self.init_spider()
-        collector = Collect(50)
-        collector.process()
-        filter_avaliable_ips(test_url)
+        if need_proxy:
+            collector = Collect(50)
+            collector.process()
+            filter_avaliable_ips(test_url)
 
     def init_spider(self):
         with open(self.table_config, 'r') as f:
             config_json = json.load(f)
 
-        if  config_json.has_key("url_table"):
+        if config_json.has_key("url_table"):
             print "creating url_table....."
             url_table_config = config_json["url_table"]
             self.create_table(table_name=self.url_table, table_config=url_table_config)
+            print "....ok...."
+        if config_json.has_key("boundary_table"):
+            print "creating boundary_table....."
+            boundary_table_config = config_json["boundary_table"]
+            self.create_table(table_name=self.boundary_table, table_config=boundary_table_config)
             print "....ok...."
         if config_json.has_key("filter_table"):
             print "creating filter_table....."
@@ -47,8 +54,6 @@ class Initializer(object):
             self.add_filter_urls(filter_table_name=self.filter_table, filter_config=filter_config_json)
             self.add_init_url(url_table_name=self.url_table, filter_config=filter_config_json)
             print "....ok...."
-
-
 
     def create_table(self, table_name, table_config):
         fields_config = table_config["fields"]
@@ -93,6 +98,7 @@ class Initializer(object):
         insert_sql = "insert into " + url_table_name + " values(%s,%s,%s,%s,now())"
         db.insert(sql=insert_sql, value_list=[(url["urlmd5"], url["url"], url["type"], url["status"])])
         db.close()
+
 
 if __name__ == "__main__":
     initializer = Initializer(source="test", table_config="table_config.json", filter_config=None)

@@ -7,17 +7,18 @@ import glob
 import shutil
 import xlrd
 import com.xin.common.MysqlManage
+import arcpy
 
 def generate_sample(path):
-    x = [_ for _ in range(504)]
+    x = [_ for _ in range(1589)]
     random.shuffle(x)
-    train = x[:378]
-    valid = x[378:504]
-    test = x[504:]
+    train = x[:953]
+    valid = x[953:1270]
+    test = x[1270:]
     print len(train),len(valid),len(test)
     work_book = xlwt.Workbook()
     sheet = work_book.add_sheet("sheet0")
-    for i in range(630):
+    for i in range(1589):
         for x in train:
             if x == i:
                 cell_value = "train"
@@ -74,38 +75,69 @@ def extract_data(txt_path,save_path):
         work_book.save(save_path+"/"+file_name.replace("TXT","xls"))
 
 
-
-
-
-
-
 def transform_coord(in_xy,out_xy):
     pass
 
 
+def create_polyline(geo_str):
+    arcpy.env.workspace = r"G:\xin.data\test_data"
+    lines = geo_str.split("|")[2].strip(";")
+    segments = lines.split(";")
+    wkt = "MULTILINESTRING( "
+    for segment in segments:
+        wkt = wkt+"("
+        segment = segment.split(",")
+        for i in range(0, len(segment), 2):
+            wkt = wkt+segment[i]+" "+segment[i+1]+","
+        wkt = wkt.strip(",")+"),"
+    wkt = wkt.strip(",")+")"
+    polyline = arcpy.FromWKT(wkt)
+    arcpy.CopyFeatures_management(polyline, "temp.shp")
+
+
+
+
+
+
+def htr(excel):
+    workbook = xlrd.open_workbook(excel)
+    sheet = workbook.sheet_by_index(0)
+    savebook = xlwt.Workbook()
+    savesheet = savebook.add_sheet("sheet1")
+    i = 0
+    for x in range(sheet.nrows):
+        filename = sheet.cell(x, 0).value
+        caption = sheet.cell(x, 1).value
+        if caption != "":
+            savesheet.write(i, 0, filename)
+            savesheet.write(i, 1, caption)
+            i = i+1
+    savebook.save("area10.xls")
 
 
 
 if __name__ == "__main__":
-
-    import random
-    import xlwt
-
-    sample_list = [_ for _ in range(504)]
-    random.shuffle(sample_list)
-
-    work = xlwt.Workbook()
-    sheet = work.add_sheet("sheet1")
-    train = sample_list[:int(0.6 * len(sample_list))]
-    val = sample_list[int(0.6 * len(sample_list)):int(0.8 * len(sample_list))]
-    test = sample_list[int(0.8 * len(sample_list)):]
-    for x in range(504):
-        if x in train:
-            sheet.write(x,0,"train")
-        elif x in val:
-            sheet.write(x,0,"val")
-        else:
-            sheet.write(x,0,"test")
-    work.save("yy.xls")
+    generate_sample("sample.xls")
+    #create_polyline("2|12719995.79,3559398.70;12720591.53,3559571.20|12720572.97,3559446.14,12720585.21,3559447.43;12720397.94,3559427.72,12720463.26,3559434.60,12720572.97,3559446.14;12720310.22,3559419.71,12720383.37,3559426.18;12720585.21,3559447.43,12720591.53,3559448.10;12719995.79,3559571.20,12720012.02,3559467.19,12720022.96,3559398.70,12720056.37,3559399.67,12720180.23,3559409.36;12720180.23,3559409.36,12720310.22,3559419.71;12720383.37,3559426.18,12720397.94,3559427.72;")
+    # htr(r"C:\Users\29625\Desktop\area10.xlsx")
+    # import random
+    # import xlwt
+    #
+    # sample_list = [_ for _ in range(1589)]
+    # random.shuffle(sample_list)
+    #
+    # work = xlwt.Workbook()
+    # sheet = work.add_sheet("sheet1")
+    # train = sample_list[:int(0.6 * len(sample_list))]
+    # val = sample_list[int(0.6 * len(sample_list)):int(0.8 * len(sample_list))]
+    # test = sample_list[int(0.8 * len(sample_list)):]
+    # for x in range(1589):
+    #     if x in train:
+    #         sheet.write(x,0,"train")
+    #     elif x in val:
+    #         sheet.write(x,0,"val")
+    #     else:
+    #         sheet.write(x,0,"test")
+    # work.save("yy.xls")
 
 

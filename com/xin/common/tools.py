@@ -37,6 +37,7 @@ def to_md5(in_str):
     out_st = m.hexdigest()
     return out_st
 
+
 # 分割地理区间
 def split_boundary(lat_max, lat_min, lng_max, lng_min, divide_num,random_rate=0.1):
     assert divide_num > 1, u"分割数必须大于1"
