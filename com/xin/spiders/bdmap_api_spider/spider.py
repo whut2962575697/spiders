@@ -9,7 +9,7 @@ import json
 
 
 def init_spider(city_code, name, boundary):
-    # Initializer(source="bdmap_api_"+name+"_"+str(city_code), table_config="table_config.json", filter_config=None, need_proxy=False)
+    #Initializer(source="bdmap_api_"+name+"_"+str(city_code), table_config="table_config.json", filter_config=None, need_proxy=False)
     boundary_table = "bdmap_api_"+name+"_"+str(city_code)+"_boundary_table"
     lng_min, lat_min, lng_max, lat_max = boundary
     boundarys = split_boundary(float(lat_max), float(lat_min), float(lng_max),
@@ -102,9 +102,9 @@ def split_boundary_outline(b_type, city_code, name):
 
 
 if __name__ == "__main__":
-    #init_spider(218, "school", [113.707703, 29.972900, 115.086123, 31.367126])
-    split_boundary_outline(1, 218, "school")
-    spider(218, "school", "大学", "XwpZGfXMn45W9Czd1UwmC6RwMMULD1Ue")
+    #init_spider(218, "spot", [113.707703, 29.972900, 115.086123, 31.367126])
+    split_boundary_outline(1, 218, "spot")
+    spider(218, "spot", "景点", "XwpZGfXMn45W9Czd1UwmC6RwMMULD1Ue")
 
 
 

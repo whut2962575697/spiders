@@ -28,7 +28,7 @@ def update_geo_data(uid, l_type, city_code, name):
 
 def download(city_code, l_type, name, tag, city):
     page_table = "bdmap_api_" + name + "_" + str(city_code) + "_page_table"
-    sql = 'select uid from '+page_table+' where tag like "%'+tag+'%"  and city="'+city+'" and geo is null'
+    sql = 'select uid from '+page_table+' where  city="'+city+'" and geo is null'
     db = MysqlHandle()
     query_data = db.query(sql)
     for (uid,) in query_data:
@@ -36,5 +36,5 @@ def download(city_code, l_type, name, tag, city):
 
 
 if __name__ == "__main__":
-    download(218, 10, "school", '高等院校', '武汉市')
+    download(218, 10, "spot", '景点', '武汉市')
 
