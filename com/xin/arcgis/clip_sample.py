@@ -31,7 +31,7 @@ def merge_shp(excel, workspace, output):
     work_book = xlrd.open_workbook(excel)
     sheet = work_book.sheet_by_index(0)
     temp_list = []
-    save_class = sheet.cell(4, 4).value.replace("tif", "shp")
+    save_class = sheet.cell(3, 4).value.replace("tif", "shp")
     temp_list.append(save_class)
     save_class = save_class.decode("gbk").encode("utf-8")
     arcpy.CopyFeatures_management(save_class, output)
@@ -263,6 +263,27 @@ def split_excel(excel):
 
 
 if __name__ == "__main__":
-    split_excel(r'C:\Users\29625\Desktop\caption.xlsx')
+    arcpy.env.workspace = r"G:\xin.data\new_sample\big_scale_shp"
+    f_class = r'G:\xin.data\new_sample\clip_shp\0.shp'
+    all_fields = arcpy.ListFields(f_class)
+    fields = []
+    for field in all_fields:
+        fields.append(field.name)
+        fields.append("SHAPE@")
+    cursor = arcpy.da.SearchCursor(f_class, fields)
+    values = []
+    for row in cursor:
+        try:
+            values.append(row)
+        except Exception, e:
+            print str(e)
+    del cursor
+    cursor = arcpy.da.InsertCursor("final_save1.shp", fields)
+    for row in values:
+        cursor.insertRow(row)
+    del cursor
+
+
+    #split_excel(r'C:\Users\29625\Desktop\caption.xlsx')
     #clip_sample(r'G:\xin.data\new_sample\clip_shp', '3parts.shp', "final_patch.shp")
     #merge_shp(r'C:\Users\29625\Desktop\caption.xlsx', r'G:\xin.data\new_sample\clip_shp\output', r'G:\xin.data\new_sample\clip_shp\save\save.shp')

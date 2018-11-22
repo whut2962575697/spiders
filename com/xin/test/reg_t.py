@@ -3,6 +3,7 @@
 import re
 import requests
 import sys
+import json
 from  urllib import quote
 import glob
 import os
@@ -10,6 +11,7 @@ reload(sys)
 from com.xin.spiders.carflac_spider.spider import DownloadTool
 from com.xin.common.ConfigManage import normal_headers
 from com.xin.common.RequestManage import PageDownload
+from com.xin.common.MysqlManage import MysqlHandle
 sys.setdefaultencoding("utf-8")
 
 # # respond  = requests.get(url="http://www.cphi.cn/s-biochem/contactinfo/",timeout=3,headers=normal_headers)
@@ -80,6 +82,52 @@ sys.setdefaultencoding("utf-8")
 # for item in  meituan_ids:
 #     print item
 
-files = glob.glob("D:/vd/*.MKV")
-for file in files:
-    os.rename(file,file.replace("MKV", "mkv"))
+# with open(r'city_boundary.txt', 'r') as f:
+#     lines = f.readlines()
+
+# with open(r'final_bd_city.json', 'r')as f:
+#     json_data = json.load(f)
+#
+#
+# for k, v in json_data.items():
+#     db = MysqlHandle()
+#     sql = "INSERT INTO BD_CITY_INFO VALUES(%s, %s, %s, %s, 0)"
+#     db.insert(sql,[[k, v["city_code"], v["jc"], v["coords"]]])
+#     db.close()
+
+
+# new_json = {}
+# for line in lines:
+#     line = line.strip("\n")
+#
+#     [city_name, coords] = line.split(" ")
+#     for k, v in json_data.items():
+#         city_code = v["city_code"]
+#         jc = v["jc"]
+#         if city_name == k:
+#             new_json[city_name] = {"city_code": city_code, "jc": jc, "coords": coords}
+#
+#
+# with open('final_bd_city.json', 'w') as f:
+#     json.dump(new_json, f)
+
+
+db = MysqlHandle()
+query_sql = "select uid,min(name),min(line_type), min(page_url) from (select * from baidu_busline_url_analyse where uid in (select uid from baidu_busline_page where status is null)) as tg group by uid"
+page_infs = db.query(query_sql)
+db.close()
+downloader = PageDownload()
+for item in page_infs:
+    print (item[0])
+    page = downloader.simple_download(item[3])
+    # if is_json(page):
+    #     json_page = json.loads(page)
+    #     if json_page.has_key("content"):
+    #         main_info = json_page["content"][0]
+    #         name = main_info["name"]
+    #         timeable = main_info["timeable"]
+    db = MysqlHandle()
+
+    if page is not None:
+        insert_sql = "update baidu_busline_page set page="
+        is_success = db.insert(insert_sql, [(item[0], item[1], item[2], page)])

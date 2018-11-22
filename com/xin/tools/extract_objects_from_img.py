@@ -8,9 +8,16 @@ import json
 import numpy as np
 import copy
 import matplotlib.pyplot as plt
-from config import small_color_cls
+# from config import small_color_cls
 from Queue import Queue
 
+
+small_color_cls = {
+    (0,0,255):{"cls_num":1},
+    (0,255,0):{"cls_num":2},
+    (255,0,0):{"cls_num":3},
+    (0,0,0):{"cls_num":0}
+}
 
 def extract_object_plus_plus(image, save_path):
     img = TIFF.open(image)
@@ -126,7 +133,9 @@ def extract_object_plus_plus(image, save_path):
         row_max = rectangle[1]
         column_min = rectangle[2]
         column_max = rectangle[3]
-        if row_max-row_min < 20 and column_max-column_min < 20:
+        row_del = row_max-row_min
+        column_del = column_max-column_min
+        if row_del < 20 and column_del < 20:
             continue
         # rec_img = copy_img[row_min:row_max + 1,column_min:column_max + 1]
         rec_img = copy_img
@@ -139,11 +148,14 @@ def extract_object_plus_plus(image, save_path):
 
 
 def is_not_black(img):
-    for row in img:
-        for cell in row:
+
+    for x, row in enumerate(img):
+        for y, cell in enumerate(row):
             if tuple(cell) != (0,0,0):
                 return True
     return False
+
+
 
 
 def img_interpolation(input_img, save_path):
@@ -208,13 +220,14 @@ def img_interpolation(input_img, save_path):
 
 
 if __name__ == "__main__":
-    img_files = glob.glob(r"G:\xin.data\new_sample\val_gt\res/*.tif")
+    img_files = glob.glob(r"G:\xin.data\new_sample\resd_new_resize\*.tif")
     for img_file in img_files:
         file_name = img_file[img_file.rindex("\\") + 1:]
         img_file = img_file.replace("\\", "/")
 
         print img_file
-        extract_object_plus_plus(img_file, r"G:\xin.data\new_sample\val_gt\extract_objects")
-        # img_interpolation(img_file, r"G:\xin.data\new_sample\val_gt\res"+"/"+file_name)
+        extract_object_plus_plus(img_file, r"G:\xin.data\new_sample\resd_extract_obj")
+        # img_interpolation(img_file, r"G:\xin.data\new_sample\resd_new_resize"+"/"+file_name)
+    # extract_object_plus_plus(r"G:\xin.data\new_sample\resd_new_resize\101.tif", r"G:\xin.data\new_sample\resd_extract_obj")
 
 
