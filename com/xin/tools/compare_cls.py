@@ -81,13 +81,13 @@ def compare_generate_caption_with_image(generate_caption,img_file):
 
 
 def calculate_rank():
-    work_book = xlrd.open_workbook(r"error_cls_new.xls")
+    work_book = xlrd.open_workbook(r"error_cls.xls")
     sheet = work_book.sheet_by_index(0)
     n_rows = sheet.nrows
     distrinct_list = list()
     for x in range(n_rows):
         file_name = sheet.cell(x, 5).value
-        img_num = int(file_name.strip(".tif"))
+        img_num = int(file_name.strip(".jpg"))
         if img_num not in distrinct_list:
             distrinct_list.append(img_num)
     area1 = 0
@@ -128,7 +128,7 @@ def calculate_rank():
 
 if __name__ == "__main__":
     calculate_rank()
-    # work_book = xlrd.open_workbook(r"C:\Users\29625\Desktop\temp\caption.xls")
+    # work_book = xlrd.open_workbook(r"C:\Users\29625\Desktop\FCNtrain.xls")
     # save_book = xlwt.Workbook()
     # save_sheet = save_book.add_sheet("sheet0")
     # i = 0
@@ -139,7 +139,7 @@ if __name__ == "__main__":
     # for x in range(1,n_rows):
     #     generate_caption = sheet.cell(x, 1).value
     #     file_name = sheet.cell(x, 4).value
-    #     file_name = file_name.replace("tif", "png")
+    #     file_name = file_name.replace("jpg", "png")
     #     caption_cls_list, img_cls_list = compare_generate_caption_with_image(generate_caption,img_path+"/"+file_name)
     #     res = True
     #     times = []
@@ -159,11 +159,13 @@ if __name__ == "__main__":
     #         for y in range(1, n_cols):
     #             save_sheet.write(i, y+1, sheet.cell(x, y).value)
     #         i = i+1
-    #
+    #     # save_sheet.write(i, 0, str(file_name))
+    #     # save_sheet.write(i, 1, str(img_cls_list))
+    #     # i = i+1
     #
     #     else:
     #         print file_name+" is  true"
-    # save_book.save("error_cls_new.xls")
+    # save_book.save("error_cls.xls")
      #caption_cls_list, img_cls_list = compare_generate_caption_with_image("service.", "imgs/rec_small_imgs/00032_8.tif")
 
 
