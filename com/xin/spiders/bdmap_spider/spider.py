@@ -131,7 +131,7 @@ class DownloadTool(object):
             y = content["navi_y"]
             geo = content["geo"]
             ext = content["ext"]
-            if type(ext)==type({"ee":""}):
+            if type(ext) == type({"ee":""}):
                 detail_info = ext["detail_info"]
             else:
                 detail_info = {"info":""}
@@ -143,16 +143,18 @@ class DownloadTool(object):
                 image = detail_info["image"]
             else:
                 image = None
+            if detail_info.has_key("display_info_redu"):
+                dispaly_redu = detail_info["display_info_redu"]
+            else:
+                dispaly_redu = None
             if detail_info.has_key("price"):
                 price = detail_info["price"]
             else:
                 price = None
 
-
-
-            sql = "insert into " + self.page_table + "  values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,now())"
+            sql = "insert into " + self.page_table + "  values (%s,%s,%s,%s,%s,%s,%s,%s,null,null,null,%s,%s,%s,null,%s,now())"
             db = MysqlHandle()
-            db.insert(sql=sql, value_list=[(urlmd5, url, uid, name, address, phone, x, y, geo, image, tag, price)])
+            db.insert(sql=sql, value_list=[(urlmd5, url, uid, name, address, phone, x, y, tag, image,  price, dispaly_redu)])
             db.close()
             update_sql = "update " + self.url_table + " set status=200 where urlmd5='%s'" % (urlmd5)
             db = MysqlHandle()

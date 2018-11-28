@@ -146,12 +146,14 @@ for x in range(1, sheet.nrows, 3):
         with_list.append(file_name)
     else:
         other_list.append(file_name)
+
 random.shuffle(with_list)
 random.shuffle(other_list)
-train_with_list = with_list[:int(0.8 * len(with_list))]
+train_with_list = with_list[:int(0.7 * len(with_list))]
 val_with_list = with_list[int(0.6 * len(with_list)):]
-train_other_list = other_list[:int(0.8 * len(other_list))]
-val_other_list = other_list[:int(0.6 * len(other_list)):]
+train_other_list = other_list[:int(0.7 * len(other_list))]
+val_other_list = other_list[int(0.6 * len(other_list)):]
+print (len(val_with_list))
 for i in range(1, sheet.nrows):
     id = sheet.cell(i, 0).value
     caption = sheet.cell(i, 1).value
@@ -169,9 +171,9 @@ for i in range(1, sheet.nrows):
     save_sheet.write(i, 6, img_id)
 
     if file_name in train_with_list or file_name in train_other_list:
-        save_sheet.write(i, 7, 0)
+        save_sheet.write(i, 7, 'train')
     if file_name in val_with_list or file_name in val_other_list:
-        save_sheet.write(i, 8, 0)
+        save_sheet.write(i, 8, 'val')
 save_book.save("final.xls")
 
 

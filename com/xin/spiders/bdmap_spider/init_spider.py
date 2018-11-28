@@ -1,5 +1,4 @@
-
-    # -*- encoding:utf-8 -*-
+# -*- encoding:utf-8 -*-
 
 from com.xin.spiders.spider.init_spider import Initializer
 from com.xin.common.MysqlManage import MysqlHandle
@@ -19,4 +18,4 @@ class BaiDuInitializer(Initializer):
 
 
 if __name__ == "__main__":
-    initializer = BaiDuInitializer(source="bdmap_hotel", table_config="table_config.json", filter_config="init_data.json")
+    initializer = BaiDuInitializer(source="bdmap_college", table_config="table_config.json", filter_config="init_data.json")

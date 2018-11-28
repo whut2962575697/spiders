@@ -73,6 +73,8 @@ class Initializer(object):
                 model.add_datetime_field(field_name=field["field_name"])
             elif field["field_type"] == "blob":
                 model.add_blob_field(field_name=field["field_name"])
+            elif field["field_type"] == "medium_blob":
+                model.add_medium_blob_field(field_name=field["field_name"])
             else:
                 print "The field_type of "+field["field_name"]+" is not exist!!"
                 pass
