@@ -37,5 +37,5 @@ class Collect(object):
 
 
 if __name__ == "__main__":
-    collector = Collect(50)
+    collector = Collect(500)
     collector.process()

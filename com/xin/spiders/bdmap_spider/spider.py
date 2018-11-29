@@ -93,6 +93,7 @@ class DownloadTool(object):
                 lat_max = max_interval.split(",")[1]
                 lng_min = min_interval.split(",")[0]
                 lng_max = max_interval.split(",")[0]
+
                 boundarys = split_boundary(int(float(lat_max)), int(float(lat_min)), int(float(lng_max)), int(float(lng_min)), 4, 0.2)
                 for _boundary in boundarys:
                     _boundary_st = str(_boundary[1][0])+","+str(_boundary[0][0])+";"+str(_boundary[1][1])+","+str(_boundary[0][1])
@@ -129,7 +130,7 @@ class DownloadTool(object):
 
             x = content["navi_x"]
             y = content["navi_y"]
-            geo = content["geo"]
+            # geo = content["geo"]
             ext = content["ext"]
             if type(ext) == type({"ee":""}):
                 detail_info = ext["detail_info"]

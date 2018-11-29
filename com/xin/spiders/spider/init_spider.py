@@ -11,12 +11,14 @@ sys.setdefaultencoding("utf-8")
 
 
 class Initializer(object):
-    def __init__(self, source, table_config, filter_config, test_url="http://www.baidu.com", need_proxy=True):
+    def __init__(self, source, table_config, filter_config, test_url="http://www.baidu.com", need_proxy=True, city_code=218, keywork="大学"):
 
         self.url_table = source+"_url_table"
         self.filter_table = source + "_filter_table"
         self.page_table = source+"_page_table"
         self.boundary_table = source+"_boundary_table"
+        self.city_code = city_code
+        self.keyword = keywork
         self.table_config = table_config
         self.filter_config = filter_config
         self.init_spider()
@@ -52,7 +54,7 @@ class Initializer(object):
                 filter_config_json = json.load(f)
 
             self.add_filter_urls(filter_table_name=self.filter_table, filter_config=filter_config_json)
-            self.add_init_url(url_table_name=self.url_table, filter_config=filter_config_json)
+            self.add_init_url(url_table_name=self.url_table, filter_config=filter_config_json, city_code=self.city_code, keyword=self.keyword)
             print "....ok...."
 
     def create_table(self, table_name, table_config):
@@ -94,7 +96,7 @@ class Initializer(object):
         db.insert(sql=insert_sql, value_list=value_list)
         db.close()
 
-    def add_init_url(self, url_table_name, filter_config):
+    def add_init_url(self, url_table_name, filter_config, city_code, keyword):
         url = filter_config["url"]
         db = MysqlHandle()
         insert_sql = "insert into " + url_table_name + " values(%s,%s,%s,%s,now())"
