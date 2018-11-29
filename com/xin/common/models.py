@@ -17,6 +17,12 @@ class Model(object):
         db.excute(sql=sql)
         db.close()
 
+    def add_medium_blob_field(self, field_name):
+        sql = "alter table "+self.table+" add "+field_name+" MEDIUMBLOB"
+        db = MysqlHandle()
+        db.excute(sql=sql)
+        db.close()
+
     def add_char_field(self, field_name, field_length):
         sql = "alter table "+self.table+" add "+field_name+" varchar("+str(field_length)+")"
         db = MysqlHandle()
@@ -62,6 +68,8 @@ class Model(object):
 
     def commit(self):
         self.drop_field(field_name="_id_temp_")
+
+
 if __name__ == "__main__":
         table1 = Model("tk1")
         table1.add_char_field(field_name="name", field_length=10)

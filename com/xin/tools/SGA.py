@@ -6,12 +6,14 @@ import numpy as np
 from scipy.optimize import fsolve, basinhopping
 import random
 import timeit
+import xlrd
 from gray_model import *
 
+original_input = []
 
 # 根据解的精度确定染色体(chromosome)的长度
 # 需要根据决策变量的上下边界来确定
-def getEncodedLength(delta=0.000001, boundarylist=[]):
+def getEncodedLength(delta=0.000000001, boundarylist=[]):
     # 每个变量的编码长度
     lengths = []
     for i in boundarylist:
@@ -36,7 +38,7 @@ def getIntialPopulation(encodelength, populationSize):
 
 
 # 染色体解码得到表现型的解
-def decodedChromosome(encodelength, chromosomes, boundarylist, delta=0.000001):
+def decodedChromosome(encodelength, chromosomes, boundarylist, delta=0.0001):
     populations = chromosomes.shape[0]
     variables = len(encodelength)
     decodedvalues = np.zeros((populations, variables))
@@ -159,24 +161,38 @@ def mutation(population, Pm=0.01):
 
 # 定义适应度函数
 def fitnessFunction(args):
-    original_input = [2646, 3684, 3564, 2493, 3595]
+    global original_input
     generated_list = calculate_generate_list(original_input)
     neighbour_generated_list = calculate_neighbour_generate_list(generated_list, args[1])
     u = calculate_gm(original_input, neighbour_generated_list, args[0])
     predicted_list = gm(u, generated_list, args[0])
     reducted_list = reduct_list(predicted_list)
     residual_list = calculate_residual(original_input, reducted_list)
-    new_residual_list = modify_residual(residual_list)
+    new_residual_list,_ = modify_residual(residual_list)
     final_predict = modify_gm(new_residual_list, reducted_list)
     loss = 0
     n = len(original_input)
     for i, f_ in enumerate(final_predict):
-        loss = loss + math.fabs(f_ - original_input[i+1])
+        loss = loss + math.fabs(f_ - original_input[i+1])/original_input[i+1]
     loss = loss/(n-1)
     return loss
 
 
 def main():
+    work_book = xlrd.open_workbook(r'C:\Users\29625\Desktop\gmdata.xls')
+    sheet = work_book.sheet_by_index(0)
+    o_list = []
+    for i in range(2, 3):
+        for j in range(1, sheet.nrows):
+            cell = sheet.cell(j, i).value
+            if cell != "":
+                o_list.append(cell+10)
+            else:
+                break
+    print (o_list)
+    global original_input
+    original_input = o_list
+
     # 每次迭代得到的最优解
     optimalSolutions = []
     optimalValues = []
@@ -184,9 +200,10 @@ def main():
     decisionVariables = [[-10.0, 10.0], [0.0, 1.0]]
     # 得到染色体编码长度
     lengthEncode = getEncodedLength(boundarylist=decisionVariables)
-    while(len(optimalValues)==0 or np.min(optimalValues)>0.006):
+    count = 0
+    for i in range(10000):
         # 得到初始种群编码
-        chromosomesEncoded = getIntialPopulation(lengthEncode, 10)
+        chromosomesEncoded = getIntialPopulation(lengthEncode, 50)
         # 种群解码
         decoded = decodedChromosome(lengthEncode, chromosomesEncoded, decisionVariables)
         # 得到个体适应度值和个体的累积概率
@@ -205,10 +222,14 @@ def main():
         optimalValues.append(np.min(list(fitnessvalues)))
         index = np.where(fitnessvalues == min(list(fitnessvalues)))
         optimalSolutions.append(final_decoded[index[0][0], :])
+        count = count + 1
+        # print (np.min(optimalValues))
+        # print (count)
     # 搜索最优解
     optimalValue = np.min(optimalValues)
     optimalIndex = np.where(optimalValues == optimalValue)
     optimalSolution = optimalSolutions[optimalIndex[0][0]]
+
     return optimalSolution, optimalValue
 
 

@@ -109,7 +109,7 @@ if __name__ == "__main__":
     # #print to_md5("https://www.sq688.com/")
     r = redis.Redis(host=config['redis']['host'], port=config['redis']['port'], db=config['redis']['db'])
     print r.keys()
-    #delete_redis(['hotqueue:bdmap_url_table'])
+    delete_redis(['hotqueue:bdmap_college_url_table'])
     #start_redis_server(path="F:\Redis-x64-3.2.100")
     #create_file(path="../spiders/carflac_spider",file_name="spider.py")
     #you_get(url="https://www.bilibili.com/bangumi/play/ep91588",output_path=r"C:\Users\29625\Desktop",file_name="1")

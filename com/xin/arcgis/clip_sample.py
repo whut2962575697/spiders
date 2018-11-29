@@ -31,7 +31,7 @@ def merge_shp(excel, workspace, output):
     work_book = xlrd.open_workbook(excel)
     sheet = work_book.sheet_by_index(0)
     temp_list = []
-    save_class = sheet.cell(3, 4).value.replace("tif", "shp")
+    save_class = sheet.cell(3, 4).value.replace("jpg", "shp")
     temp_list.append(save_class)
     save_class = save_class.decode("gbk").encode("utf-8")
     arcpy.CopyFeatures_management(save_class, output)
@@ -44,7 +44,7 @@ def merge_shp(excel, workspace, output):
     del cursor
 
     for x in range(4, sheet.nrows, 3):
-        f_class = sheet.cell(x, 4).value.replace("tif", "shp")
+        f_class = sheet.cell(x, 4).value.replace("jpg", "shp")
         if f_class in temp_list:
             continue
         print f_class
@@ -80,7 +80,7 @@ def split_excel(excel):
     save_book = xlwt.Workbook()
     save_sheet = save_book.add_sheet("sheet")
     i = 0
-    for x in range(1, 661):
+    for x in range(1, 715):
         id = sheet.cell(x, 0).value
         caption = sheet.cell(x, 1).value
         caption_id = sheet.cell(x, 2).value
@@ -103,7 +103,7 @@ def split_excel(excel):
     save_book = xlwt.Workbook()
     save_sheet = save_book.add_sheet("sheet")
     i = 0
-    for x in range(661, 1321):
+    for x in range(715, 1429):
         id = sheet.cell(x, 0).value
         caption = sheet.cell(x, 1).value
         caption_id = sheet.cell(x, 2).value
@@ -126,7 +126,7 @@ def split_excel(excel):
     save_book = xlwt.Workbook()
     save_sheet = save_book.add_sheet("sheet")
     i = 0
-    for x in range(1321, 1981):
+    for x in range(1429, 2143):
         id = sheet.cell(x, 0).value
         caption = sheet.cell(x, 1).value
         caption_id = sheet.cell(x, 2).value
@@ -149,7 +149,7 @@ def split_excel(excel):
     save_book = xlwt.Workbook()
     save_sheet = save_book.add_sheet("sheet")
     i = 0
-    for x in range(1981, 2641):
+    for x in range(2143, 2857):
         id = sheet.cell(x, 0).value
         caption = sheet.cell(x, 1).value
         caption_id = sheet.cell(x, 2).value
@@ -172,7 +172,7 @@ def split_excel(excel):
     save_book = xlwt.Workbook()
     save_sheet = save_book.add_sheet("sheet")
     i = 0
-    for x in range(2641, 3301):
+    for x in range(2857, 3571):
         id = sheet.cell(x, 0).value
         caption = sheet.cell(x, 1).value
         caption_id = sheet.cell(x, 2).value
@@ -195,7 +195,7 @@ def split_excel(excel):
     save_book = xlwt.Workbook()
     save_sheet = save_book.add_sheet("sheet")
     i = 0
-    for x in range(3301, 3961):
+    for x in range(3571, 4285):
         id = sheet.cell(x, 0).value
         caption = sheet.cell(x, 1).value
         caption_id = sheet.cell(x, 2).value
@@ -218,7 +218,7 @@ def split_excel(excel):
     save_book = xlwt.Workbook()
     save_sheet = save_book.add_sheet("sheet")
     i = 0
-    for x in range(3961, 4621):
+    for x in range(4285, sheet.nrows):
         id = sheet.cell(x, 0).value
         caption = sheet.cell(x, 1).value
         caption_id = sheet.cell(x, 2).value
@@ -238,52 +238,29 @@ def split_excel(excel):
         i = i + 1
     save_book.save("sample7.xls")
 
-    save_book = xlwt.Workbook()
-    save_sheet = save_book.add_sheet("sheet")
-    i = 0
-    for x in range(4621, sheet.nrows):
-        id = sheet.cell(x, 0).value
-        caption = sheet.cell(x, 1).value
-        caption_id = sheet.cell(x, 2).value
-        file_name = sheet.cell(x, 3).value
-        file_name2 = sheet.cell(x, 4).value
-        image_id = sheet.cell(x, 5).value
-        imgid = sheet.cell(x, 6).value
-        split = sheet.cell(x, 7).value
-        save_sheet.write(i, 0, id)
-        save_sheet.write(i, 1, caption)
-        save_sheet.write(i, 2, caption_id)
-        save_sheet.write(i, 3, file_name)
-        save_sheet.write(i, 4, file_name2)
-        save_sheet.write(i, 5, image_id)
-        save_sheet.write(i, 6, imgid)
-        save_sheet.write(i, 7, split)
-        i = i + 1
-    save_book.save("sample8.xls")
-
 
 if __name__ == "__main__":
-    arcpy.env.workspace = r"G:\xin.data\new_sample\big_scale_shp"
-    f_class = r'G:\xin.data\new_sample\clip_shp\0.shp'
-    all_fields = arcpy.ListFields(f_class)
-    fields = []
-    for field in all_fields:
-        fields.append(field.name)
-        fields.append("SHAPE@")
-    cursor = arcpy.da.SearchCursor(f_class, fields)
-    values = []
-    for row in cursor:
-        try:
-            values.append(row)
-        except Exception, e:
-            print str(e)
-    del cursor
-    cursor = arcpy.da.InsertCursor("final_save1.shp", fields)
-    for row in values:
-        cursor.insertRow(row)
-    del cursor
+    # arcpy.env.workspace = r"G:\xin.data\new_sample\big_scale_shp"
+    # f_class = r'G:\xin.data\new_sample\clip_shp\0.shp'
+    # all_fields = arcpy.ListFields(f_class)
+    # fields = []
+    # for field in all_fields:
+    #     fields.append(field.name)
+    #     fields.append("SHAPE@")
+    # cursor = arcpy.da.SearchCursor(f_class, fields)
+    # values = []
+    # for row in cursor:
+    #     try:
+    #         values.append(row)
+    #     except Exception, e:
+    #         print str(e)
+    # del cursor
+    # cursor = arcpy.da.InsertCursor("final_save1.shp", fields)
+    # for row in values:
+    #     cursor.insertRow(row)
+    # del cursor
 
 
-    #split_excel(r'C:\Users\29625\Desktop\caption.xlsx')
+    #split_excel(r'C:\Users\29625\Desktop\FCNtrain.xls')
     #clip_sample(r'G:\xin.data\new_sample\clip_shp', '3parts.shp', "final_patch.shp")
-    #merge_shp(r'C:\Users\29625\Desktop\caption.xlsx', r'G:\xin.data\new_sample\clip_shp\output', r'G:\xin.data\new_sample\clip_shp\save\save.shp')
+    merge_shp(r'C:\Users\29625\Desktop\FCNtrain.xls', r'G:\xin.data\new_sample\clip_shp\output', r'G:\xin.data\new_sample\clip_shp\save\save.shp')

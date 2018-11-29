@@ -72,6 +72,6 @@ class UrlFeeder(object):
 
 
 if __name__ == "__main__":
-    url_feeder = UrlFeeder(source="bdmap_hotel")
+    url_feeder = UrlFeeder(source="bdmap_spot")
     url_feeder.start_feed()
 
