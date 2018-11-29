@@ -18,4 +18,4 @@ class BaiDuInitializer(Initializer):
 
 
 if __name__ == "__main__":
-    initializer = BaiDuInitializer(source="bdmap_college", table_config="table_config.json", filter_config="init_data.json")
+    initializer = BaiDuInitializer(source="bdmap_spot", table_config="table_config.json", filter_config="init_data.json")

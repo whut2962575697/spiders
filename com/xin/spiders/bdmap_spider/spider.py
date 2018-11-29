@@ -45,7 +45,7 @@ class Spider(object):
 class DownloadTool(object):
     def __init__(self, source):
         self.city_code = 218
-        self.keyword = "酒店"
+        self.keyword = "景点"
         self.url_table = source+"_url_table"
         self.filter_table = source + "_filter_table"
         self.page_table = source + "_page_table"

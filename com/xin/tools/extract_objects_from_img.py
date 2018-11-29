@@ -4,24 +4,26 @@ from libtiff import TIFF
 import glob,os
 import xlrd,xlwt
 import cv2
+from skimage.io import imread
 import json
 import numpy as np
 import copy
 import matplotlib.pyplot as plt
-# from config import small_color_cls
+from config import small_color_cls
 from Queue import Queue
 
 
-small_color_cls = {
-    (0,0,255):{"cls_num":1},
-    (0,255,0):{"cls_num":2},
-    (255,0,0):{"cls_num":3},
-    (0,0,0):{"cls_num":0}
-}
+# small_color_cls = {
+#     (0,0,255):{"cls_num":1},
+#     (0,255,0):{"cls_num":2},
+#     (255,0,0):{"cls_num":3},
+#     (0,0,0):{"cls_num":0}
+# }
 
 def extract_object_plus_plus(image, save_path):
-    img = TIFF.open(image)
-    img = img.read_image()
+    # img = TIFF.open(image)
+    # img = img.read_image()
+    img = imread(image)
     nrows = img.shape[0]
     ncols = img.shape[0]
     file_name = image.split("/")[-1]
@@ -135,7 +137,7 @@ def extract_object_plus_plus(image, save_path):
         column_max = rectangle[3]
         row_del = row_max-row_min
         column_del = column_max-column_min
-        if row_del < 20 and column_del < 20:
+        if row_del < 2 and column_del < 2:
             continue
         # rec_img = copy_img[row_min:row_max + 1,column_min:column_max + 1]
         rec_img = copy_img
@@ -143,7 +145,7 @@ def extract_object_plus_plus(image, save_path):
         # y = len(rec_img[0])
         if len(rec_img) > 10 and len(rec_img[0]) > 10:
             rec_img = cv2.cvtColor(rec_img.astype(np.uint8), cv2.COLOR_RGB2BGR)
-            cv2.imwrite(save_path+"/"+file_name.strip(".tif") + "_" + str(count) + ".tif", rec_img)
+            cv2.imwrite(save_path+"/"+file_name.strip(".png") + "_" + str(count) + ".tif", rec_img)
             count = count + 1
 
 
@@ -156,11 +158,10 @@ def is_not_black(img):
     return False
 
 
-
-
-def img_interpolation(input_img, save_path):
-    img = TIFF.open(input_img)
-    img = img.read_image()
+def img_interpolation(input_img, save_path, resize_scale=200):
+    # img = TIFF.open(input_img)
+    # img = img.read_image()
+    img = imread(input_img)
     (row_num, column_num) = img.shape[:2]
     color_value_list = []
     for x in range(row_num):
@@ -169,38 +170,39 @@ def img_interpolation(input_img, save_path):
             if cell not in color_value_list:
                 color_value_list.append(cell)
     #img = cv2.cvtColor(img.astype(np.uint8), cv2.COLOR_RGB2BGR)
-    resize_img = cv2.resize(img, (200, 200), interpolation=cv2.INTER_CUBIC)
+    resize_img = cv2.resize(img, (resize_scale, resize_scale), interpolation=cv2.INTER_CUBIC)
     (row_num, column_num) = resize_img.shape[:2]
     for x in range(row_num):
         for y in range(column_num):
             cell = tuple(resize_img[x][y])
             color_loss = []
             for _cell in color_value_list:
-                loss = np.square(int(cell[0]) - int(_cell[0])) + np.square(int(cell[1]) - int(_cell[1])) + np.square(int(cell[2]) - (_cell[2]))
+                loss = np.square(int(cell[0]) - int(_cell[0])) + np.square(
+                    int(cell[1]) - int(_cell[1])) + np.square(int(cell[2]) - (_cell[2]))
                 color_loss.append(loss)
 
             if x > 0 or y > 0:
                 near_color_list = []
                 try:
-                    cell_1 = tuple(resize_img[x-1][y])
+                    cell_1 = tuple(resize_img[x - 1][y])
                     if cell_1 in color_value_list and cell_1 not in near_color_list:
                         near_color_list.append(cell_1)
                 except Exception as e:
                     print(e.message)
                 try:
-                    cell_1 = tuple(resize_img[x+1][y])
+                    cell_1 = tuple(resize_img[x + 1][y])
                     if cell_1 in color_value_list and cell_1 not in near_color_list:
                         near_color_list.append(cell_1)
                 except:
                     pass
                 try:
-                    cell_1 = tuple(resize_img[x][y-1])
+                    cell_1 = tuple(resize_img[x][y - 1])
                     if cell_1 in color_value_list and cell_1 not in near_color_list:
                         near_color_list.append(cell_1)
                 except:
                     pass
                 try:
-                    cell_1 = tuple(resize_img[x][y+1])
+                    cell_1 = tuple(resize_img[x][y + 1])
                     if cell_1 in color_value_list and cell_1 not in near_color_list:
                         near_color_list.append(cell_1)
                 except:
@@ -215,19 +217,21 @@ def img_interpolation(input_img, save_path):
             else:
                 color_index = np.argmin(color_loss)
                 resize_img[x][y] = color_value_list[color_index]
+
+
     resize_img = cv2.cvtColor(resize_img.astype(np.uint8), cv2.COLOR_RGB2BGR)
     cv2.imwrite(save_path, resize_img)
 
 
 if __name__ == "__main__":
-    img_files = glob.glob(r"G:\xin.data\new_sample\resd_new_resize\*.tif")
+    img_files = glob.glob(r"G:\xin.data\new_sample\huiducolor_resize\*.png")
     for img_file in img_files:
         file_name = img_file[img_file.rindex("\\") + 1:]
         img_file = img_file.replace("\\", "/")
 
         print img_file
-        extract_object_plus_plus(img_file, r"G:\xin.data\new_sample\resd_extract_obj")
-        # img_interpolation(img_file, r"G:\xin.data\new_sample\resd_new_resize"+"/"+file_name)
-    # extract_object_plus_plus(r"G:\xin.data\new_sample\resd_new_resize\101.tif", r"G:\xin.data\new_sample\resd_extract_obj")
+        extract_object_plus_plus(img_file, r"G:\xin.data\new_sample\huiducolor_objs")
+    #     img_interpolation(img_file, r"G:\xin.data\new_sample\huiducolor_resize"+"/"+file_name, 14)
+    # extract_object_plus_plus(r"G:\xin.data\new_sample\huiducolor_resize\101.png", r"G:\xin.data\new_sample\huiducolor_objs")
 
 

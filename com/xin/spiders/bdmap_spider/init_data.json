@@ -2,5 +2,5 @@
 "filters":[
 
 ],
-  "url":{"urlmd5":"278caa6494cf393b5653d5240c6624c1", "url":"https://map.baidu.com/?newmap=1&reqflag=pcmap&biz=1&from=webmap&da_par=direct&pcevaname=pc4.1&qt=spot&from=webmap&c=218&wd=%E9%85%92%E5%BA%97&wd2=&pn=0&nn=0&db=0&sug=0&addr=0&pl_data_type=life&pl_sort_type=data_type&pl_sort_rule=0&pl_business_type=cinema&pl_business_id=&da_src=pcmappg.poi.page&on_gel=1&src=7&gr=3&l=12&rn=10&tn=B_NORMAL_MAP&ie=utf-8&b=(12658020,3478524;12811429,3658064)", "boundary":"12658020,3478524;12811429,3658064", "type":2, "status":0}
+  "url":{"urlmd5":"278caa6494cf393b5653d5240c6624c1", "url":"https://map.baidu.com/?newmap=1&reqflag=pcmap&biz=1&from=webmap&da_par=direct&pcevaname=pc4.1&qt=spot&from=webmap&c=218&wd=景点&wd2=&pn=0&nn=0&db=0&sug=0&addr=0&pl_data_type=life&pl_sort_type=data_type&pl_sort_rule=0&pl_business_type=cinema&pl_business_id=&da_src=pcmappg.poi.page&on_gel=1&src=7&gr=3&l=12&rn=10&tn=B_NORMAL_MAP&ie=utf-8&b=(12658020,3478524;12811429,3658064)", "boundary":"12658020,3478524;12811429,3658064", "type":2, "status":0}
 }

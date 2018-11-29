@@ -22,4 +22,4 @@ def main_run(thread_num, source):
 
 
 if __name__ == "__main__":
-    main_run(100, "bdmap_college")
+    main_run(100, "bdmap_spot")
